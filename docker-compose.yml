@@ -98,6 +98,22 @@ services:
       - elasticsearch
     restart: unless-stopped
 
+
+  esexporter:
+    build:
+      context: exexporter/
+      args:
+        ESEXPORTER_VERSION: ${ESEXPORTER_VERSION}
+
+    ports:
+      - 9114:9114
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+    restart: unless-stopped
+
+
 networks:
   elk:
     driver: bridge
